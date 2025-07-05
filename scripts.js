@@ -1,6 +1,6 @@
+function Getuser(userId){
 let request = new XMLHttpRequest();
-let x = "10";
-request.open("GET", "https://jsonplaceholder.typicode.com/posts");
+request.open("GET", `https://jsonplaceholder.typicode.com/posts?userId=${userId}`);
 request.responseType = "json";
 request.send();
 request.onload = function response() {
@@ -9,5 +9,5 @@ request.onload = function response() {
   for (post of posts) {
     output += post.title + "\n" + "\n";
     document.getElementById("titles").textContent = output;
-  }
+  }}
 };
