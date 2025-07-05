@@ -4,13 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+       
   </head>
   <body>
-    <button onclick="Getuser(1)">1</button>
-        <button onclick="Getuser(2)">2</button>
-
-        <pre id="titles"></pre>
-
+    <h1>Subject Fetcher</h1>
+    <div class="button-group" id="user-buttons">
+    </div>
+    <pre id="titles"></pre>
   </body>
+  <script>
+    const userCount = 10;
+    const buttonGroup = document.getElementById('user-buttons');
+    for (let i = 1; i <= userCount; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = `User ${i} Subjects`;
+      btn.onclick = () => Getuser(i);
+      buttonGroup.appendChild(btn);
+    }
+  </script>
   <script src="scripts.js"></script>
 </html>
