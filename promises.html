@@ -5,21 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <h1 id="title1" style="visibility: hidden">title1</h1>
+    <h1 id="title2" style="visibility: hidden">title2</h1>
+    <h1 id="title3" style="visibility: hidden">title3</h1>
+    <h1 id="title4" style="visibility: hidden">title4</h1>
+  </body>
   <script>
-    let p = new Promise(function (resolve, reject) {
+    new Promise((resolve, reject) => {
       // async code
-      good = true;
-      if (good) {
+      setTimeout(() => {
+        document.getElementById("title1").style.visibility = "visible";
         resolve();
-      } else {
-        reject();
-      }
-    });
-    p.then(function () {
-      console.log("HI then");
-    }).catch(function () {
-      console.log("ERR");
-    });
+      }, 500);
+    })
+      .then(() => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            document.getElementById("title2").style.visibility = "visible";
+            resolve();
+          }, 500);
+        });
+      })
+      .then(() => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            document.getElementById("title3").style.visibility = "visible";
+
+            resolve();
+          }, 500);
+        }).then(() => {
+          setTimeout(() => {
+            document.getElementById("title4").style.visibility = "visible";
+          }, 500);
+        });
+      });
   </script>
 </html>
