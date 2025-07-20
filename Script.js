@@ -11,22 +11,25 @@ function Getposts(userId) {
     });
 }
 function getusersaxios() {
-  axios
-    .get("https://jsonplaceholder.typicode.com/users")
-    .then((response) => {
-      let json = response.data;
-      for (const user of json) {
-        let btn = document.createElement("button");
-        btn.textContent = `${user.name}`;
-        btn.addEventListener("click", () => {
-          Getposts(user.id);
-        });
-        document.getElementById("user-buttons").appendChild(btn);
-      }
-    })
-    .catch((err) => {
-      alert(err);
-    });
+  return new Promise((resolve, reject) => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((response) => {
+        let json = response.data;
+        for (const user of json) {
+          let btn = document.createElement("button");
+          btn.textContent = `${user.name}`;
+          btn.addEventListener("click", () => {
+            Getposts(user.id);
+          });
+          document.getElementById("user-buttons").appendChild(btn);
+        }
+        resolve()
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  });
 }
 
 getusersaxios();
