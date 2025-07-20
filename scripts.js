@@ -11,3 +11,4 @@ request.onload = function response() {
     document.getElementById("titles").textContent = output;
   }}
 };
+ Getuser(userId)
