@@ -1,8 +1,11 @@
 function Getusernames() {
-  fetch(`https://jsonplaceholder.typicode.com/users`)
+ return new Promise((resolve, reject) => {
+      fetch(`https://jsonplaceholder.typicode.com/users`)
     .then((response) => {
       if (response.ok){
-     return response.json()}
+     return response.json()} else {
+        reject("error")
+     }
     })   .then((json) => {
       for (const user of json) {
         let btn = document.createElement("button");
@@ -14,6 +17,8 @@ function Getusernames() {
       }
     });
  
+  })
+
  
 }
 function Getposts(userId) {
@@ -27,4 +32,4 @@ function Getposts(userId) {
       document.getElementById("titles").textContent = output;
     });
 }
-Getusernames();
+Getusernames()
