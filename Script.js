@@ -1,8 +1,8 @@
-
 function Getposts(userId) {
-  fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
-    .then((response) => response.json())
-    .then((json) => {
+  axios
+    .get(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
+    .then((response) => {
+      let json = response.data;
       let output = "";
       for (const post of json) {
         output += post.title + "\n" + "\n";
