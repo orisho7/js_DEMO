@@ -1,3 +1,4 @@
+src = "node_modules/axios/dist/axios.js";
 function Getposts(userId) {
   axios
     .get(`https://jsonplaceholder.typicode.com/posts?userId=${userId}`)
