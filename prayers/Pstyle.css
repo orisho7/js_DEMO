@@ -1,34 +1,73 @@
-html,
-  
-    body {
-           position: relative;
-      height: 100%;
-     
-      background: #181e36;
-      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: 14px;
-      color: #fff;
-      margin: 0;
-      padding: 0;
-    }
+html, body {
+  position: relative;
+  min-height: 100vh;
+  background: #181e36;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
 
-    .swiper {
-      width: 10%;
-      height: 10%;
-    }
+.header-bg-container {
+  position: relative;
+  width: 100vw;
+  max-width: 100%;
+  height: 380px;
+  overflow: hidden;
+}
 
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      background: #444;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+.header-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 380px;
+  object-fit: cover;
+  z-index: 1;
+  display: block;
+  margin: 0;
+  box-shadow: 0 4px 24px #0005;
+}
+.header-img:hover {
+  opacity: 0.8;
+}
 
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+.swiper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+
+  box-shadow: 0 2px 12px #0004;
+}
+
+.swiper-slide {
+z-index: 2;
+  text-align: center;
+  font-size: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.swiper-slide img {
+  display: none;
+}
+.pray {
+  width: 100px;
+  height: 200px;
+  flex-direction: column;
+  display: flex;
+  border: 15px solid #1e3618;
+}
+.name {
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  color: #ffebc6;
+  text-shadow: 1px 1px 8px #0008;
+}

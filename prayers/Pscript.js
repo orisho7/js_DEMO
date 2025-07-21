@@ -5,6 +5,18 @@ var swiper = new Swiper(".mySwiper", {
     prevEl: ".swiper-button-prev",
   },
 });
+axios
+  .get(
+    "https://api.aladhan.com/v1/timingsByCity/21-07-2025?city=Homs&country=Syria"
+  )
+  .then((response) => {
+    let Fajr = response.data.data.timings.Fajr;
+    console.log(Fajr);
+    let output = Fajr;
+    document.getElementById("test").textContent = output;
+
+    // You can display timings in your UI here
+  });
 swiper.on("slideChange", function () {
   const activeSlide = swiper.slides[swiper.activeIndex];
   const country = activeSlide.getAttribute("data-country");
@@ -14,25 +26,24 @@ swiper.on("slideChange", function () {
         "https://api.aladhan.com/v1/timingsByCity/21-07-2025?city=Homs&country=Syria"
       )
       .then((response) => {
-        let timings = response.data.data.timings;
-        console.log(timings);
-
-        // You can display timings in your UI here
+        let Fajr = response.data.data.timings.Fajr;
+        console.log(Fajr);
+        let output = Fajr;
+        document.getElementById("test").textContent = output;
       });
-  }else if (country === "SA") {
+  } else if (country === "SA") {
     axios
       .get(
         "https://api.aladhan.com/v1/timingsByCity/21-07-2025?city=Riyadh&country=Saudi Arabia"
       )
       .then((response) => {
-        let timings = response.data.data.timings;
-        console.log(timings);
-
-        // You can display timings in your UI here
+        let Fajr = response.data.data.timings.Fajr;
+        console.log(Fajr);
+        let output = Fajr;
+        document.getElementById("test").textContent = output;
       });
-  }
-   else {
-    console.log(" not found");
+  } else {
+    console.log("not found");
   }
 });
 
