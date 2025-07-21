@@ -1,0 +1,19 @@
+{
+  "name": "js_demo",
+  "version": "1.0.0",
+  "description": "Learning REST API with JavaScript",
+  "main": "Script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orisho7/js_DEMO.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orisho7/js_DEMO/issues"
+  },
+  "homepage": "https://github.com/orisho7/js_DEMO#readme"
+}
