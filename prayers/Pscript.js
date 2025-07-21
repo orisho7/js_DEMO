@@ -16,10 +16,22 @@ swiper.on("slideChange", function () {
       .then((response) => {
         let timings = response.data.data.timings;
         console.log(timings);
-        
+
         // You can display timings in your UI here
       });
-  } else {
+  }else if (country === "SA") {
+    axios
+      .get(
+        "https://api.aladhan.com/v1/timingsByCity/21-07-2025?city=Riyadh&country=Saudi Arabia"
+      )
+      .then((response) => {
+        let timings = response.data.data.timings;
+        console.log(timings);
+
+        // You can display timings in your UI here
+      });
+  }
+   else {
     console.log(" not found");
   }
 });
