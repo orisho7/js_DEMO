@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="Pstyle.css" />
   </head>
   <body>
+    <nav class="navbar">
+      <span class="nav-title">مواقيت الصلاة</span>
+      <button id="mode-toggle" class="mode-toggle">🌙 الوضع الليلي</button>
+    </nav>
     <div class="header-bg-container">
-      <img
-        id="img" class="header-img" alt="Header"
-        src="https://wallpapers.com/images/featured/night-sky-moon-bdlgkile5f7jt8bl.jpg"
-      
-      />
+     
 
       <!-- Swiper -->
       <div class="swiper mySwiper">
@@ -30,18 +30,51 @@
         <div class="swiper-button-prev"></div>
       </div>
     </div>
-    <h1>أوقات الصلاة اليوم</h1>
+    <h1 class="title">أوقات الصلاة اليوم</h1>
 
-    <div id="timings">
+   <div class="timings" id="timings"><div class="pray" id="pray">
+        <h1 class="name">العشاء</h1>
+        <h3 class="time" id="Isha"></h3>
+        
+      </div>
+     <div class="pray" id="pray">
+        <h1 class="name">المغرب</h1>
+        <h3 class="time" id="Maghrib"></h3>
+            </div> 
+       <div class="pray" id="pray">
+        <h1 class="name">الظهر</h1>
+        <h3 class="time" id="Duhur"></h3>
+      </div>
+       <div class="pray" id="pray">
+        <h1 class="name">العصر</h1>
+        <h3 class="time" id="Asr"></h3>
+      </div>
+      
+       
       <div class="pray" id="pray">
         <h1 class="name">الفجر</h1>
-        <h3 class="time" id="test"></h3>
+        <h3 class="time" id="Fajr"></h3>
       </div>
+      
+      </div>
+     
     </div>
 
     <!-- Swiper JS -->
     <script src="../node_modules/swiper/swiper-bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      // Dark/Light mode toggle
+      const modeToggle = document.getElementById('mode-toggle');
+      modeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('light-mode');
+        if(document.body.classList.contains('light-mode')) {
+          modeToggle.textContent = '🌑 الوضع الليلي';
+        } else {
+          modeToggle.textContent = '🌙 الوضع النهاري';
+        }
+      });
+    </script>
     <script src="Pscript.js"></script>
   </body>
 </html>

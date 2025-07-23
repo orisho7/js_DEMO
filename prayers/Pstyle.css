@@ -1,12 +1,60 @@
 html, body {
   position: relative;
   min-height: 100vh;
-  background: #181e36;
+  background: var(--bg, #181e36);
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  color: #fff;
+  color: var(--text, #fff);
   margin: 0;
   padding: 0;
+}
+
+body.light-mode {
+  --bg: #f7f7f7;
+  --text: #181e36;
+  --pray-bg: #fffbe6;
+  --pray-border: #e0e0e0;
+  --pray-shadow: #0002;
+}
+body:not(.light-mode) {
+  --bg: #181e36;
+  --text: #fff;
+  --pray-bg: #182036cc;
+  --pray-border: #181b36;
+  --pray-shadow: rgb(0, 0, 0);
+}
+
+.navbar {
+  width: 95%;
+  background: var(--pray-bg, #182036cc);
+  color: var(--text, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 12px #0004;
+  font-size: 1.3rem;
+  position: sticky;
+  top: 0;
+  margin-left: 10px ;
+  z-index: 100;
+}
+.nav-title {
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+.mode-toggle {
+  background: none;
+  border: 2px solid var(--text, #fff);
+  color: var(--text, #fff);
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.mode-toggle:hover {
+  background: var(--text, #fff);
+  color: var(--bg, #181e36);
 }
 
 .header-bg-container {
@@ -58,16 +106,50 @@ z-index: 2;
 .swiper-slide img {
   display: none;
 }
+.timings{
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+ 
+}.title {
+  position: block;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  font-size: 54px;
+  color: #fff;
+  text-shadow: 1px 1px 8px #0008;
+  letter-spacing: 2px;}
 .pray {
-  width: 100px;
-  height: 200px;
+  background: var(--pray-bg, #182036cc);
+  border-radius: 18px;
+  padding: 2rem 2.5rem;
+  font-size: 2.1rem;
+  box-shadow: 0 2px 12px var(--pray-shadow, rgb(0,0,0));
+  color: #3392eb;
+  letter-spacing: 1px;
+  white-space: pre-wrap;
+  margin-top: 1.5rem;
   flex-direction: column;
   display: flex;
-  border: 15px solid #1e3618;
+  border: 15px solid var(--pray-border, #181b36);
 }
+
 .name {
-  font-size: 1.5rem;
   letter-spacing: 2px;
-  color: #ffebc6;
-  text-shadow: 1px 1px 8px #0008;
+  color: #3392eb;
+    text-shadow: 1px 1px 1px rgb(255, 255, 255);
+
 }
+.time{
+  font-size: 2.5rem;
+  color: #3392eb;
+  text-shadow: 1px 1px 1px rgb(255, 255, 255);
+  margin-right: 5px;
+  letter-spacing: 2px;
+    direction: rtl;
+
+}
+
+
