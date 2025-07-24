@@ -12,33 +12,45 @@
     <h1 id="title4" style="visibility: hidden">title4</h1>
   </body>
   <script>
-    new Promise((resolve, reject) => {
-      // async code
-      setTimeout(() => {
-        document.getElementById("title1").style.visibility = "visible";
+    async function getTitles() {
+      await new Promise((resolve, reject) => {
+        // async code
+        setTimeout(() => {
+          document.getElementById("title1").style.visibility = "visible";
+          resolve();
+        }, 500);
+      });
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          document.getElementById("title2").style.visibility = "visible";
+          resolve();
+        }, 500);
+      });
+     await new Promise((resolve) => {
+        setTimeout(() => {
+          document.getElementById("title3").style.visibility = "visible";
+          resolve();
+        }, 500);
+      });
+        setTimeout(() => {
+        document.getElementById("title4").style.visibility = "visible";
         resolve();
       }, 500);
-    })
-      .then(() => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            document.getElementById("title2").style.visibility = "visible";
-            resolve();
-          }, 500);
-        });
-      })
-      .then(() => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            document.getElementById("title3").style.visibility = "visible";
+    }
+    getTitles();
 
-            resolve();
-          }, 500);
-        }).then(() => {
-          setTimeout(() => {
-            document.getElementById("title4").style.visibility = "visible";
-          }, 500);
-        });
-      });
+    
+// old code
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     document.getElementById("title3").style.visibility = "visible";
+
+    //     resolve();
+    //   }, 500);
+    // }).then(() => {
+    //   setTimeout(() => {
+    //     document.getElementById("title4").style.visibility = "visible";
+    //   }, 500);
+    // });
   </script>
 </html>
