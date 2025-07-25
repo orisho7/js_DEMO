@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../node_modules/axios/dist/axios.js"></script>
+  </head>
+  <body>
+    <h2>hello</h2>
+  </body>
+  <script>
+    let token = localStorage.getItem("token");
+    axios
+      .post(
+        "https://reqres.in/api/login",
+        { email: "eve.holt@reqres.in", password: "pistol" },
+        {
+          headers: { "x-api-key": "reqres-free-v1" },
+        }
+      )
+      .then(function (response) {
+        console.log("Token: " + response.data.token);
+        let Token = response.data.token;
+        localStorage.setItem("token", Token);
+
+        console.log(Token);
+      });
+  </script>
+</html>

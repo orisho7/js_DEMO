@@ -5,12 +5,12 @@ var swiper = new Swiper(".mySwiper", {
   },
 });
 
-function fillPrayers(wich) {
-  document.getElementById("Fajr").textContent = wich.Fajr;
-  document.getElementById("Duhur").textContent = wich.Dhuhr;
-  document.getElementById("Asr").textContent = wich.Asr;
-  document.getElementById("Maghrib").textContent = wich.Maghrib ;
-  document.getElementById("Isha").textContent = wich.Isha;
+function fillPrayers(which) {
+  document.getElementById("Fajr").textContent = which.Fajr;
+  document.getElementById("Duhur").textContent = which.Dhuhr;
+  document.getElementById("Asr").textContent = which.Asr;
+  document.getElementById("Maghrib").textContent = which.Maghrib ;
+  document.getElementById("Isha").textContent = which.Isha;
 }
 
 // Initial load for Syria
