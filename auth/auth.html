@@ -7,24 +7,45 @@
     <script src="../node_modules/axios/dist/axios.js"></script>
   </head>
   <body>
-    <h2>hello</h2>
+    <form onsubmit="login(event)">
+      <label for="name">name</label>
+
+      <input type="text" name="name" id="name" />
+      <label for="password">password</label>
+      <input type="password" name="password" id="password" />
+      <button type="submit">Login</button>
+    </form>
   </body>
   <script>
     let token = localStorage.getItem("token");
-    axios
-      .post(
-        "https://reqres.in/api/login",
-        { email: "eve.holt@reqres.in", password: "pistol" },
-        {
-          headers: { "x-api-key": "reqres-free-v1" },
-        }
-      )
-      .then(function (response) {
-        console.log("Token: " + response.data.token);
-        let Token = response.data.token;
-        localStorage.setItem("token", Token);
 
-        console.log(Token);
-      });
+    async function login(event) {
+      event.preventDefault();
+      let email = document.getElementById("name").value;
+      let password = document.getElementById("password").value;
+      try {
+        await axios
+          .post(
+            "https://reqres.in/api/login",
+            { email, password },
+            {
+              headers: { "x-api-key": "reqres-free-v1" },
+            }
+          )
+          .then(function (response) {
+            console.log("Token: " + response.data.token);
+          })
+          .catch(function (error) {
+            if (error.response.data.error == "user not found") {
+              console.log("user not found");
+            } else if (error.response.data.error == "Missing password") {
+              console.log("Missing password");
+            }
+            console.log(error);
+          });
+      } catch (e) {
+        console.log(e);
+      }
+    }
   </script>
 </html>
