@@ -18,6 +18,7 @@
   "homepage": "https://github.com/orisho7/js_DEMO#readme",
   "dependencies": {
     "axios": "^1.10.0",
+    "bootstrap": "^5.3.7",
     "swiper": "^11.2.10"
   }
 }
