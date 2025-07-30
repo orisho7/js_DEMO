@@ -11,7 +11,8 @@ function getuserinfo() {
       postid = post.id;
       postdate = post.created_at;
       comments = post.comments_count;
-      
+      tags = post.tags;
+
       document.getElementById("posts").innerHTML += `
       <div class="card shadow">
               <div class="card-header">
@@ -32,6 +33,14 @@ function getuserinfo() {
                 <h6 style="color: gray">${postdate}</h6>
                 <h5 class="card-title"><b>${posttitle}</b></h5>
                 <p class="card-text">${postbody}</p>
+                <a
+                  href="#"
+                  class="btn btn-secondary disabled"
+                  tabindex="-1"
+                  role="button"
+                  aria-disabled="true"
+                  >${tags}</a
+                >
                 <hr />
                 <a href="">
                   <span>
@@ -55,8 +64,70 @@ function getuserinfo() {
                 ><br /><br />
                 <a href="#" class="btn btn-primary">Like</a>
               </div>
-            </div>`
+            </div>`;
     }
   });
 }
+function login() {
+  username = document.getElementById("username").value;
+  password = document.getElementById("password").value;
+  axios
+    .post("https://tarmeezacademy.com/api/v1/login", {
+      username: username,
+      password: password,
+    })
+    .then((response) => {
+      console.log(response.data.token);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem(
+        "username",
+        JSON.stringify(response.data.user.username)
+      );
+      const modal = document.getElementById("exampleModal");
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+      showdonealert();
+      checklogin();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+function showdonealert() {
+  const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
+  const appendAlert = (message, type) => {
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = [
+      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+      `   <div>${message}</div>`,
+      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+      "</div>",
+    ].join("");
+
+    alertPlaceholder.append(wrapper);
+  };
+
+  appendAlert("Logged in successfully", "success");
+}
+function checklogin() {
+  const token = localStorage.getItem("token");
+  const loginbtn = document.getElementById("login-btn");
+  const signupbtn = document.getElementById("signup-btn");
+  const signoutbtn = document.getElementById("signout-btn");
+  if (token == null) {
+    loginbtn.style.display = "block";
+    signupbtn.style.display = "block";
+    signoutbtn.style.display = "none";
+  } else {
+    loginbtn.style.display = "none";
+    signupbtn.style.display = "none";
+    signoutbtn.style.display = "block";
+  }
+}
+function signout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("username");
+  checklogin();
+}
+checklogin();
 getuserinfo();

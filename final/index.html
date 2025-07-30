@@ -8,14 +8,14 @@
     <!-- Bootstrap -->
     <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
     <script src="../node_modules/axios/dist/axios.js"></script>
-    <script src="script.js"></script>
+
     <link
       rel="stylesheet"
       href="../node_modules/bootstrap/dist/css/bootstrap.css"
     />
     <!-- Bootstrap. -->
     <style>
-      body {
+      .body {
         background: rgb(255, 255, 255);
       }
       .card {
@@ -24,6 +24,60 @@
     </style>
   </head>
   <body>
+    <div id="liveAlertPlaceholder"></div>
+
+    <!-- Modals -->
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label"
+                  >Username:</label
+                >
+                <input type="text" class="form-control" id="username" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Password:</label
+                >
+                <input type="password" class="form-control" id="password" />/>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" onclick="login()" class="btn btn-primary">
+              login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modals. -->
+
     <!-- NAV -->
 
     <div class="container">
@@ -96,8 +150,27 @@
                   </button>
                 </form>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                  <button type="button" class="btn btn-primary">Login</button>
-                  <button type="button" class="btn btn-primary">Signup</button>
+                  <button
+                    id="login-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                    data-bs-whatever="@mdo"
+                    type="button"
+                    class="btn btn-primary"
+                  >
+                    Login
+                  </button>
+                  <button id="signup-btn" type="button" class="btn btn-primary">
+                    Signup
+                  </button>
+                  <button
+                    onclick="signout()"
+                    id="signout-btn"
+                    type="button"
+                    class="btn btn-danger"
+                  >
+                    Signout
+                  </button>
                 </div>
               </div>
             </div>
@@ -133,6 +206,14 @@
                 <h6 style="color: gray">2 minutes ago</h6>
                 <h5 class="card-title"><b>Alan wake</b></h5>
                 <p class="card-text">Remedy studio</p>
+                <a
+                  href="#"
+                  class="btn btn-secondary disabled"
+                  tabindex="-1"
+                  role="button"
+                  aria-disabled="true"
+                  >Link</a
+                >
                 <hr />
                 <a href="">
                   <span>
@@ -160,10 +241,11 @@
             <!-- POST -->
             <!-- POST -->
 
-      
-          <!-- POSTS -->
+            <!-- POSTS -->
+          </div>
         </div>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
