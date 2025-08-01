@@ -27,9 +27,11 @@
     <div id="liveAlertPlaceholder"></div>
 
     <!-- Modals -->
+    <!-- login_Modal -->
+
     <div
       class="modal fade"
-      id="exampleModal"
+      id="loginModal"
       tabindex="-1"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
@@ -37,7 +39,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">New message</h1>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
             <button
               type="button"
               class="btn-close"
@@ -57,7 +59,7 @@
                 <label for="message-text" class="col-form-label"
                   >Password:</label
                 >
-                <input type="password" class="form-control" id="password" />/>
+                <input type="password" class="form-control" id="password" />
               </div>
             </form>
           </div>
@@ -71,6 +73,66 @@
             </button>
             <button type="button" onclick="login()" class="btn btn-primary">
               login
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- login_Modal. -->
+
+    <div
+      class="modal fade"
+      id="signupModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Signup</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input type="text" class="form-control" id="name" />
+                <label for="recipient-name" class="col-form-label"
+                  >Email:</label
+                >
+                <input type="text" class="form-control" id="email" />
+                <label for="recipient-name" class="col-form-label"
+                  >Username:</label
+                >
+                <input type="text" class="form-control" id="susername" />
+              </div>
+              <div class="mb-3">
+                <label for="message-text" class="col-form-label"
+                  >Password:</label
+                >
+                <input type="password" class="form-control" id="spassword" />
+                <br />
+                <label for="formFile" class="form-label">Profile image</label>
+                <input class="form-control" type="file" id="formFile" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" onclick="signup()" class="btn btn-primary">
+              Signup
             </button>
           </div>
         </div>
@@ -153,14 +215,21 @@
                   <button
                     id="login-btn"
                     data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    data-bs-target="#loginModal"
                     data-bs-whatever="@mdo"
                     type="button"
                     class="btn btn-primary"
                   >
                     Login
                   </button>
-                  <button id="signup-btn" type="button" class="btn btn-primary">
+                  <button
+                    id="signup-btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#signupModal"
+                    data-bs-whatever="@mdo"
+                    type="button"
+                    class="btn btn-primary"
+                  >
                     Signup
                   </button>
                   <button

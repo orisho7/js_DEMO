@@ -8,10 +8,11 @@ function getuserinfo() {
       postimg = post.image;
       posttitle = post.title;
       postbody = post.body;
-      postid = post.id;
       postdate = post.created_at;
       comments = post.comments_count;
       tags = post.tags;
+      id = post.id;
+
 
       document.getElementById("posts").innerHTML += `
       <div class="card shadow">
@@ -33,14 +34,7 @@ function getuserinfo() {
                 <h6 style="color: gray">${postdate}</h6>
                 <h5 class="card-title"><b>${posttitle}</b></h5>
                 <p class="card-text">${postbody}</p>
-                <a
-                  href="#"
-                  class="btn btn-secondary disabled"
-                  tabindex="-1"
-                  role="button"
-                  aria-disabled="true"
-                  >${tags}</a
-                >
+                <span id = "tags-${id}"> </span>
                 <hr />
                 <a href="">
                   <span>
@@ -65,8 +59,42 @@ function getuserinfo() {
                 <a href="#" class="btn btn-primary">Like</a>
               </div>
             </div>`;
+      const currentpost = `tags-${id}`;
+      document.getElementById(currentpost).innerHTML = "";
+
+      for (const tag of tags) {
+        document.getElementById(
+          `tags-${id}`
+        ).innerHTML += `<a href="#" class="btn btn-secondary disabled" tabindex="-1" role="button" aria-disabled="true">${tag.name}</a>`;
+      }
     }
   });
+}
+function signup() {
+  email = document.getElementById("email").value;
+  fname = document.getElementById("name").value;
+  picture = document.getElementById("formFile").value;
+  username = document.getElementById("susername").value;
+  password = document.getElementById("spassword").value;
+  console.log(email, fname, picture, username, password,id);
+  axios
+    .post("https://tarmeezacademy.com/api/v1/register", {
+      username: username,
+      email: email,
+      password: password,
+      name: fname,
+      profile_image: picture,
+    })
+    .then((response) => {
+      console.log(response.data.token);
+      localStorage.setItem("token", response.data.token);
+
+      const modal = document.getElementById("signupModal");
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+      showdonealert();
+      checklogin();
+    });
 }
 function login() {
   username = document.getElementById("username").value;
@@ -83,7 +111,7 @@ function login() {
         "username",
         JSON.stringify(response.data.user.username)
       );
-      const modal = document.getElementById("exampleModal");
+      const modal = document.getElementById("loginModal");
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
       showdonealert();
@@ -107,7 +135,10 @@ function showdonealert() {
     alertPlaceholder.append(wrapper);
   };
 
-  appendAlert("Logged in successfully", "success");
+  appendAlert("Successfully logged in", "success");
+  setTimeout(() => {
+    alertPlaceholder.innerHTML = "";
+  }, 2000);
 }
 function checklogin() {
   const token = localStorage.getItem("token");
