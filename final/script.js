@@ -13,7 +13,6 @@ function getuserinfo() {
       tags = post.tags;
       id = post.id;
 
-
       document.getElementById("posts").innerHTML += `
       <div class="card shadow">
               <div class="card-header">
@@ -76,7 +75,7 @@ function signup() {
   picture = document.getElementById("formFile").value;
   username = document.getElementById("susername").value;
   password = document.getElementById("spassword").value;
-  console.log(email, fname, picture, username, password,id);
+  console.log(email, fname, picture, username, password, id);
   axios
     .post("https://tarmeezacademy.com/api/v1/register", {
       username: username,
@@ -107,10 +106,10 @@ function login() {
     .then((response) => {
       console.log(response.data.token);
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem(
-        "username",
-        JSON.stringify(response.data.user.username)
-      );
+      console.log(response.data.user.username);
+
+      localStorage.setItem("username", response.data.user.username);
+      localStorage.setItem("profileImage", response.data.user.profile_image);
       const modal = document.getElementById("loginModal");
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
@@ -140,19 +139,31 @@ function showdonealert() {
     alertPlaceholder.innerHTML = "";
   }, 2000);
 }
+console.log(localStorage.getItem("profileImage"));
+document.getElementById("pfi").src = localStorage.getItem("profileImage");
+document.getElementById("navusername").textContent =
+  "@" + localStorage.getItem("username");
+
 function checklogin() {
   const token = localStorage.getItem("token");
+
   const loginbtn = document.getElementById("login-btn");
   const signupbtn = document.getElementById("signup-btn");
   const signoutbtn = document.getElementById("signout-btn");
+  const navname = document.getElementById("navusername");
+  const navimg = document.getElementById("pfi");
   if (token == null) {
     loginbtn.style.display = "block";
     signupbtn.style.display = "block";
     signoutbtn.style.display = "none";
+    navname.style.display = "none";
+    navimg.style.display = "none";
   } else {
     loginbtn.style.display = "none";
     signupbtn.style.display = "none";
     signoutbtn.style.display = "block";
+    navname.style.display = "block";
+    navimg.style.display = "block";
   }
 }
 function signout() {
@@ -160,5 +171,6 @@ function signout() {
   localStorage.removeItem("username");
   checklogin();
 }
+
 checklogin();
 getuserinfo();
