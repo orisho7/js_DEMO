@@ -1,6 +1,6 @@
 src = "node_modules/axios/dist/axios.js";
-function getuserinfo() {
-  axios.get("https://tarmeezacademy.com/api/v1/posts").then((response) => {
+function getposts(link) {
+  axios.get(link).then((response) => {
     for (const post of response.data.data) {
       console.log(post.author.username);
       username = post.author.username;
@@ -25,11 +25,13 @@ function getuserinfo() {
                 <span> <b>@${username}</b></span>
               </div>
               <div class="card-body">
+              <a href="post.html?id=${id}">
                 <img
                   class="w-100"
                   src="${postimg}"
                   alt=""
                 />
+              </a>
                 <h6 style="color: gray">${postdate}</h6>
                 <h5 class="card-title"><b>${posttitle}</b></h5>
                 <p class="card-text">${postbody}</p>
@@ -58,6 +60,7 @@ function getuserinfo() {
                 <a href="#" class="btn btn-primary">Like</a>
               </div>
             </div>`;
+
       const currentpost = `tags-${id}`;
       document.getElementById(currentpost).innerHTML = "";
 
@@ -69,108 +72,46 @@ function getuserinfo() {
     }
   });
 }
-function signup() {
-  email = document.getElementById("email").value;
-  fname = document.getElementById("name").value;
-  picture = document.getElementById("formFile").value;
-  username = document.getElementById("susername").value;
-  password = document.getElementById("spassword").value;
-  console.log(email, fname, picture, username, password, id);
+
+function post() {
+  let formData = new FormData();
+  const image = formData.append(
+    "image",
+    document.getElementById("image").files[0]
+  );
+  const tilte = formData.append(
+    "title",
+    document.getElementById("title").value
+  );
+  const body = formData.append("body", document.getElementById("body").value);
+  const date = formData.append("created_at", new Date().toISOString());
+  const token = localStorage.getItem("token");
   axios
-    .post("https://tarmeezacademy.com/api/v1/register", {
-      username: username,
-      email: email,
-      password: password,
-      name: fname,
-      profile_image: picture,
+    .post("https://tarmeezacademy.com/api/v1/posts", formData, {
+      headers: { authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      console.log(response.data.token);
-      localStorage.setItem("token", response.data.token);
-
-      const modal = document.getElementById("signupModal");
+      console.log(response.data);
+      const modal = document.getElementById("postModal");
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
       showdonealert();
       checklogin();
-    });
-}
-function login() {
-  username = document.getElementById("username").value;
-  password = document.getElementById("password").value;
-  axios
-    .post("https://tarmeezacademy.com/api/v1/login", {
-      username: username,
-      password: password,
-    })
-    .then((response) => {
-      console.log(response.data.token);
-      localStorage.setItem("token", response.data.token);
-      console.log(response.data.user.username);
-
-      localStorage.setItem("username", response.data.user.username);
-      localStorage.setItem("profileImage", response.data.user.profile_image);
-      const modal = document.getElementById("loginModal");
-      const modalInstance = bootstrap.Modal.getInstance(modal);
-      modalInstance.hide();
-      showdonealert();
-      checklogin();
+      window.location.reload();
     })
     .catch((error) => {
       console.log(error);
     });
 }
-function showdonealert() {
-  const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
-  const appendAlert = (message, type) => {
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = [
-      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-      `   <div>${message}</div>`,
-      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-      "</div>",
-    ].join("");
+page = 1;
 
-    alertPlaceholder.append(wrapper);
-  };
-
-  appendAlert("Successfully logged in", "success");
-  setTimeout(() => {
-    alertPlaceholder.innerHTML = "";
-  }, 2000);
-}
-console.log(localStorage.getItem("profileImage"));
-document.getElementById("pfi").src = localStorage.getItem("profileImage");
-document.getElementById("navusername").textContent =
-  "@" + localStorage.getItem("username");
-
-function checklogin() {
-  const token = localStorage.getItem("token");
-
-  const loginbtn = document.getElementById("login-btn");
-  const signupbtn = document.getElementById("signup-btn");
-  const signoutbtn = document.getElementById("signout-btn");
-  const navname = document.getElementById("navusername");
-  const navimg = document.getElementById("pfi");
-  if (token == null) {
-    loginbtn.style.display = "block";
-    signupbtn.style.display = "block";
-    signoutbtn.style.display = "none";
-    navname.style.display = "none";
-    navimg.style.display = "none";
-  } else {
-    loginbtn.style.display = "none";
-    signupbtn.style.display = "none";
-    signoutbtn.style.display = "block";
-    navname.style.display = "block";
-    navimg.style.display = "block";
+window.addEventListener("scroll", function () {
+  const currentScrollPosition = window.scrollY + window.innerHeight;
+  const totalDocumentHeight = document.documentElement.scrollHeight;
+  if (currentScrollPosition >= totalDocumentHeight - 1) {
+    ++page;
+    getposts(`https://tarmeezacademy.com/api/v1/posts?limit=5&page=${page}`);
   }
-}
-function signout() {
-  localStorage.removeItem("token");
-  localStorage.removeItem("username");
-  checklogin();
-}
+});
 
-checklogin();
-getuserinfo();
+getposts("https://tarmeezacademy.com/api/v1/posts");
