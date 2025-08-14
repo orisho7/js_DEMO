@@ -28,9 +28,11 @@ function signup() {
       const modalInstance = bootstrap.Modal.getInstance(modal);
       modalInstance.hide();
       showdonealert();
-      checklogin();
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     })
+
     .catch((error) => {
       if (error.response.data.errors.email) {
         showerralert(error.response.data.errors.email[0]);
