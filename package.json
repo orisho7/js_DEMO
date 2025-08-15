@@ -4,7 +4,7 @@
   "description": "Learning REST API with JavaScript",
   "main": "Script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devStart": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "dependencies": {
     "axios": "^1.10.0",
     "bootstrap": "^5.3.7",
+    "express": "^5.1.0",
     "form-data": "^4.0.4",
     "swiper": "^11.2.10"
   }
