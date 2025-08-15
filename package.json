@@ -4,7 +4,7 @@
   "description": "Learning REST API with JavaScript",
   "main": "Script.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon nodex/server.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
     "express": "^5.1.0",
     "form-data": "^4.0.4",
     "swiper": "^11.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
